@@ -3,41 +3,25 @@ const Job = require("../../models/job.model");
 
 const StudentDataYearBranchWise = async (req, res) => {
   try {
-    // first year 
-    const firstYearComputer = await User.find({ role: "student", "studentProfile.department": "Computer", "studentProfile.year": 1 });
-    const firstYearCivil = await User.find({ role: "student", "studentProfile.department": "Civil", "studentProfile.year": 1 });
-    const firstYearElectrical = await User.find({ role: "student", "studentProfile.department": "Electrical", "studentProfile.year": 1 });
-    const firstYearMechanical = await User.find({ role: "student", "studentProfile.department": "Mechanical", "studentProfile.year": 1 });
+    const { year, branch, rollNumber } = req.query;
 
-    // second year 
-    const secondYearComputer = await User.find({ role: "student", "studentProfile.department": "Computer", "studentProfile.year": 2 });
-    const secondYearCivil = await User.find({ role: "student", "studentProfile.department": "Civil", "studentProfile.year": 2 });
-    const secondYearElectrical = await User.find({ role: "student", "studentProfile.department": "Electrical", "studentProfile.year": 2 });
-    const secondYearMechanical = await User.find({ role: "student", "studentProfile.department": "Mechanical", "studentProfile.year": 2 });
+    let filter = { role: "student" };
 
-    // third year 
-    const thirdYearComputer = await User.find({ role: "student", "studentProfile.department": "Computer", "studentProfile.year": 3 });
-    const thirdYearCivil = await User.find({ role: "student", "studentProfile.department": "Civil", "studentProfile.year": 3 });
-    const thirdYearElectrical = await User.find({ role: "student", "studentProfile.department": "Electrical", "studentProfile.year": 3 });
-    const thirdYearMechanical = await User.find({ role: "student", "studentProfile.department": "Mechanical", "studentProfile.year": 3 });
+    if (year) filter["studentProfile.year"] = parseInt(year);
+    if (branch) filter["studentProfile.department"] = branch;
+  if (rollNumber) filter["studentProfile.rollNumber"] = rollNumber; // exact match
 
-    // fourth year 
-    const fourthYearComputer = await User.find({ role: "student", "studentProfile.department": "Computer", "studentProfile.year": 4 });
-    const fourthYearCivil = await User.find({ role: "student", "studentProfile.department": "Civil", "studentProfile.year": 4 });
-    const fourthYearElectrical = await User.find({ role: "student", "studentProfile.department": "Electrical", "studentProfile.year": 4 });
-    const fourthYearMechanical = await User.find({ role: "student", "studentProfile.department": "Mechanical", "studentProfile.year": 4 });
+    const students = await User.find(filter);
 
-    return res.json({
-      firstYearComputer, firstYearCivil, firstYearElectrical, firstYearMechanical,
-      secondYearComputer, secondYearCivil, secondYearElectrical, secondYearMechanical,
-      thirdYearComputer, thirdYearCivil, thirdYearElectrical, thirdYearMechanical,
-      fourthYearComputer, fourthYearCivil, fourthYearElectrical, fourthYearMechanical
-    });
+    return res.json(students);
+
   } catch (error) {
     console.log("student-data-for-admin.controller.js => ", error);
     return res.status(500).json({ msg: "Internal Server Error!" });
   }
-}
+};
+
+
 
 const NotifyStudentStatus = async (req, res) => {
   try {
