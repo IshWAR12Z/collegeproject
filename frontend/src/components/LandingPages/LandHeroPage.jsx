@@ -60,7 +60,7 @@ function LandingHeroPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2 }}
         >
-          {[
+          {[ 
             { icon: <FaBriefcase />, label: "500+ Job Offers" },
             { icon: <FaUsers />, label: "100+ Hiring Companies" },
             { icon: <FaUniversity />, label: "Top Campus Placements" },
