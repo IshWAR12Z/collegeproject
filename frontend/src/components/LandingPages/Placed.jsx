@@ -125,7 +125,7 @@ function PlacedStudents() {
                       <p className="fw-bold text-primary mb-1">{student.ctc} LPA</p>
                       <p className="text-muted mb-0">
                         Batch: {student.addmissionYear} -{" "}
-                        {parseInt(student.addmissionYear) + 3}
+                        {parseInt(student.addmissionYear) + 4}
                       </p>
                     </div>
                   </motion.div>
