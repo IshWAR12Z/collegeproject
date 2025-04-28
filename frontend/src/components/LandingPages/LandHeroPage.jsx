@@ -1,100 +1,91 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaBriefcase, FaUsers, FaUniversity } from "react-icons/fa";
+import { FaBriefcase, FaUsers, FaUniversity, FaArrowRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import CareerImage from "../../assets/placements.png";  // Image import ki hai
+import CareerImage from "../../assets/placements.png";
 
 function LandingHeroPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full min-h-screen flex flex-col lg:flex-row items-center bg-white text-gray-900 px-6 lg:px-20 py-16">
+    <div className="relative w-full overflow-hidden max-w-screen-2xl mx-auto min-h-screen flex flex-col lg:flex-row items-center bg-gradient-to-br from-blue-50 via-white to-purple-100 text-gray-800 px-6 lg:px-20 py-16 pt-24">
+
+      {/* 🔮 Background Light Effect */}
+      <div className="absolute top-10 right-10 w-72 h-72 bg-blue-100 rounded-full blur-3xl opacity-30 z-0"></div>
 
       {/* 🔹 Left Content Section */}
-      <div className="w-full lg:w-1/2 flex flex-col justify-center">
+      <div className="w-full lg:w-1/2 flex flex-col justify-center z-10">
         <motion.h1 
-          className="text-4xl lg:text-6xl font-extrabold"
+          className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight"
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          Supercharge Your <span className="text-blue-600">Career</span> with Placements
+          Supercharge Your <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Career</span> with Placements
         </motion.h1>
         
         <motion.p 
-          className="mt-4 text-lg lg:text-xl text-gray-700"
+          className="mt-6 text-base sm:text-lg lg:text-xl text-gray-600"
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
         >
-          Empowering students with top placement opportunities.  
+          Empowering students with top placement opportunities.
+          <br className="hidden sm:block" />
           Your future starts here!
         </motion.p>
         
         {/* 🔹 Call-to-Action Buttons */}
         <motion.div 
-          className="mt-6 flex space-x-4"
+          className="mt-8 flex flex-col sm:flex-row gap-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2 }}
         >
           <button 
-            className="px-6 py-3 bg-blue-600 text-white font-bold rounded-lg shadow-md hover:bg-blue-700 transition"
+            className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-lg shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-300 flex items-center gap-2"
             onClick={() => navigate("/student/login")}
           >
-            Get Started - Student Login
+            <FaArrowRight /> Get Started
           </button>
-          <button className="px-6 py-3 border-2 border-blue-600 font-bold text-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition">
+          <button className="px-6 py-3 border-2 border-blue-600 font-bold text-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition-all duration-300">
             Learn More
           </button>
         </motion.div>
 
         {/* 🔹 Placement Stats */}
         <motion.div 
-          className="mt-10 flex gap-10"
+          className="mt-12 flex flex-wrap gap-8 sm:gap-10"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2 }}
         >
-          <div className="flex flex-col items-center">
-            <FaBriefcase className="text-4xl text-blue-600" />
-            <h3 className="text-xl font-semibold mt-2">500+ Job Offers</h3>
-          </div>
-          <div className="flex flex-col items-center">
-            <FaUsers className="text-4xl text-blue-600" />
-            <h3 className="text-xl font-semibold mt-2">100+ Hiring Companies</h3>
-          </div>
-          <div className="flex flex-col items-center">
-            <FaUniversity className="text-4xl text-blue-600" />
-            <h3 className="text-xl font-semibold mt-2">Top Campus Placements</h3>
-          </div>
+          {[
+            { icon: <FaBriefcase />, label: "500+ Job Offers" },
+            { icon: <FaUsers />, label: "100+ Hiring Companies" },
+            { icon: <FaUniversity />, label: "Top Campus Placements" },
+          ].map((item, index) => (
+            <div key={index} className="flex flex-col items-center bg-white border border-gray-300 shadow-md p-6 rounded-xl hover:shadow-lg transition duration-300 w-40">
+              <div className="text-4xl text-blue-600">{item.icon}</div>
+              <h3 className="text-md sm:text-lg font-semibold mt-3 text-center">{item.label}</h3>
+            </div>
+          ))}
         </motion.div>
       </div>
 
       {/* 🔹 Right Image Section */}
       <motion.div 
-        className="w-full lg:w-1/2 flex bg-transparent justify-center mt-10 lg:mt-0"
+        className="w-full lg:w-1/2 flex justify-center items-center mt-12 lg:mt-0 px-4 z-10"
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1 }}
       >
         <img 
-          // src="https://plus.unsplash.com/premium_photo-1679243792923-fe4631b234d1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
           src={CareerImage} 
           alt="Placement Success"
-          style={{ background: "none" }}
-          className="w-4/5 lg:w-full max-w-lg  bg-transparent"
+          className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl h-auto object-contain rounded-xl shadow-lg"
         />
-
-{/* <img 
-  src={CareerImage} 
-  alt="Placement Success"
-  className="w-4/5 lg:w-full max-w-lg object-contain" // Ensures image fits without background
-  style={{ filter: "drop-shadow(0px 0px 0px transparent)" }} // Removes shadow
-/> */}
-
       </motion.div>
-
     </div>
   );
 }
