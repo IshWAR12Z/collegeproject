@@ -18,28 +18,38 @@ function LandingNavbar() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 w-full flex justify-between items-center px-4 md:px-10 py-3 z-50 
-        backdrop-blur-xl shadow-md transition-all duration-300 ${
-          isScrolled ? "bg-white/90" : "bg-white/50"
+      className={`fixed top-0 left-0 w-full flex justify-between items-center px-6 md:px-12 py-4 z-50
+        backdrop-blur-md transition-all duration-300 border-b ${
+          isScrolled ? "bg-blue-950/80 shadow-lg border-blue-800/50" : "bg-blue-900/40 border-transparent"
         }`}
     >
-      {/* Left Section - Logo */}
-      <div className="flex items-center gap-2 md:gap-3">
-        <img src={Logo} alt="Logo" className="w-8 h-8 md:w-12 md:h-12 transition-all duration-300" />
-        <h1 className="text-base md:text-xl font-bold text-blue-700">Placement Cell</h1>
-      </div>
+      {/* Left Section - Logo and Title */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+        className="flex items-center gap-2 md:gap-4"
+      >
+        <img src={Logo} alt="Logo" className="w-9 h-9 md:w-12 md:h-12 object-contain" />
+        <h1 className="text-xl md:text-2xl font-bold tracking-wide text-white">Placement Cell</h1>
+      </motion.div>
 
       {/* Desktop Navigation Links */}
-      <div className="hidden md:flex gap-4 lg:gap-6 text-base md:text-lg font-bold text-gray-900">
-        <a href="/" className="hover:text-blue-500 transition no-underline">Home</a>
-        <a href="#about" className="hover:text-blue-500 transition no-underline">About us</a>
-        <a href="#contact" className="hover:text-blue-500 transition no-underline">Contact us</a>
-        <a href="#" className="hover:text-blue-500 transition no-underline">More</a>
+      <div className="hidden md:flex gap-6 lg:gap-8 items-center text-sm md:text-base font-semibold tracking-wide text-gray-100">
+        <a href="/" className="no-underline hover:text-blue-400 transition-colors">Home</a>
+        <a href="#about" className="no-underline hover:text-blue-400 transition-colors">About Us</a>
+        <a href="#contact" className="no-underline hover:text-blue-400 transition-colors">Contact Us</a>
+        <a
+          href="#login"
+          className="px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-700 transition-all text-white shadow-md no-underline"
+        >
+          Log In
+        </a>
       </div>
 
       {/* Mobile Menu Button */}
       <button className="md:hidden focus:outline-none" onClick={() => setMenuOpen(!menuOpen)}>
-        {menuOpen ? <X className="w-7 h-7 text-gray-900" /> : <Menu className="w-7 h-7 text-gray-900" />}
+        {menuOpen ? <X className="w-8 h-8 text-white" /> : <Menu className="w-8 h-8 text-white" />}
       </button>
 
       {/* Mobile Navigation Menu */}
@@ -49,12 +59,17 @@ function LandingNavbar() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="absolute top-full left-0 w-full max-w-xs mx-auto bg-white shadow-md rounded-lg flex flex-col items-center py-4 space-y-4 md:hidden"
+            className="absolute top-full left-4 right-4 mx-auto mt-2 bg-blue-900/95 shadow-xl rounded-xl flex flex-col items-center py-6 space-y-5 md:hidden backdrop-blur-md"
           >
-            <a href="/" className="text-base font-bold text-gray-900 hover:text-blue-500">Home</a>
-            <a href="#about" className="text-base font-bold text-gray-900 hover:text-blue-500">About us</a>
-            <a href="#contact" className="text-base font-bold text-gray-900 hover:text-blue-500">Contact us</a>
-            <a href="#" className="text-base font-bold text-gray-900 hover:text-blue-500">More</a>
+            <a href="/" className="text-lg font-semibold text-gray-100 hover:text-blue-400 transition-colors no-underline">Home</a>
+            <a href="#about" className="text-lg font-semibold text-gray-100 hover:text-blue-400 transition-colors no-underline">About Us</a>
+            <a href="#contact" className="text-lg font-semibold text-gray-100 hover:text-blue-400 transition-colors no-underline">Contact Us</a>
+            <a
+              href="#login"
+              className="px-5 py-2 rounded-full bg-blue-600 hover:bg-blue-700 transition-all text-white shadow-md no-underline"
+            >
+              Log In
+            </a>
           </motion.div>
         )}
       </AnimatePresence>
