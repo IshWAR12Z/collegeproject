@@ -18,7 +18,9 @@ const getHiredStudents = async (req, res) => {
                     select: "companyName"
                 }
             })
-            .select("first_name last_name profile studentProfile.department studentProfile.year studentProfile.appliedJobs")
+            // ✅ Update .select() line
+            .select("first_name last_name profile studentProfile.department studentProfile.year studentProfile.addmissionYear studentProfile.appliedJobs")
+
             .lean();
 
         if (!hiredStudents.length) {
@@ -34,6 +36,7 @@ const getHiredStudents = async (req, res) => {
                     profileImage: student.profile || "/profileImgs/default/defaultProfileImg.jpg",
                     branch: student.studentProfile.department,
                     year: student.studentProfile.year,
+                    addmissionYear: student.studentProfile.addmissionYear,
                     company: job.jobId.company?.companyName || "N/A",
                     jobTitle: job.jobId.jobTitle,
                     ctc: job.jobId.salary
